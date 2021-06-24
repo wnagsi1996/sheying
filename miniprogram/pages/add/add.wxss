@@ -1,0 +1,16 @@
+/* pages/add/add.wxss */
+page{
+  background-color: #f7f7f7;
+}
+.form{
+  margin:25rpx;
+  padding:20rpx;
+  border-radius:10rpx;
+  background-color: #fff;
+}
+.form .item{
+  margin:50rpx 0;
+}
+.form .item text{
+  padding-left:30rpx
+}

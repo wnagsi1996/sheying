@@ -1,0 +1,35 @@
+<!--pages/user/user.wxml-->
+<view class="header">
+  <view class="header-top">
+    <view class="left">
+      <image wx:if="{{!isLogin}}" class="img" src="../../images/user-nologin.jfif"></image>
+      <image wx:else class="img" src="{{userInfo.avatarUrl}}"></image>
+    </view>
+   <view class="right" wx:if="{{isLogin}}">
+    <view class="name text-size-lg">{{userInfo.nickName}}</view>
+    <view class="chenhu">影坛新手</view>
+   </view>
+   <view wx:else class="no-login">
+    <button class="login-btn" open-type="getUserInfo" bindtap="_getUserInfo">登录</button>
+    <view class="login text-size-lg color-red">登录</view>
+   </view>
+  </view>
+  <view class="header-bottom">
+    <view class="headeer-item">
+      <view class="num text-size-lg">{{isLogin?userInfo.articleNum:0}}</view>
+      <view class="name">作品</view>
+    </view>
+    <view class="headeer-item">
+      <view class="num text-size-lg">{{isLogin?userInfo.LikeNum:0}}</view>
+      <view class="name">喜欢</view>
+    </view>
+    <view class="headeer-item">
+      <view class="num text-size-lg">{{isLogin?userInfo.scanNum:0}}</view>
+      <view class="name">浏览</view>
+    </view>
+  </view>
+  
+</view>
+<view class="menu-list">
+  <view class="list-item" data-url="../add/add" bindtap="toUrl">发布作品</view>
+</view>

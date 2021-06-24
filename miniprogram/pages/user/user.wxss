@@ -1,0 +1,76 @@
+/* pages/user/user.wxss */
+
+.header{
+  margin:100rpx 25rpx 25rpx 25rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 20rpx;
+  box-shadow: 0 0 20rpx #d3d3d3;
+  position: relative;
+}
+.header-top{
+  margin-top: 100rpx;
+  display: flex;
+
+}
+.header-top .left{
+  width: 180rpx;
+}
+.header-top .right{
+  flex: 1;
+  margin-left: 30rpx;
+}
+.header-top .img{
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 100rpx;
+}
+.header-top .chenhu{
+  color:#666;
+  margin-top: 10rpx;
+}
+.header-bottom{
+  margin-top: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.headeer-item{
+ flex: 1;
+}
+.headeer-item .num{
+  font-weight: bold;
+  padding-bottom: 20rpx;
+}
+.headeer-item .name{
+  color:#444
+}
+.headeer-item:nth-child(2){
+  border-left:1px solid #ccc;
+  border-right:1px solid #ccc;
+}
+.no-login{
+  position: relative;
+}
+.no-login .login-btn{
+  position: absolute;
+  top: 40rpx;
+  opacity: 0;
+}
+.no-login .login{
+  height: 180rpx;
+  line-height: 180rpx;
+  margin-left: 40rpx;
+}
+.menu-list{
+  margin:25rpx;
+  background-color: #fff;
+  padding: 20rpx;
+  box-shadow: 0 0 20rpx #d3d3d3;
+  border-radius: 10rpx;
+}
+.list-item{
+  height: 60rpx;
+  line-height: 60rpx;
+}

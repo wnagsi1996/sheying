@@ -1,0 +1,40 @@
+<!--pages/add/add.wxml-->
+<view class="form">
+ <view class="item">
+  <text>标题</text>
+  <van-field value="{{formList.title}}" placeholder="输入标题" data-name="title"  bind:change="onChange" />
+ </view>
+ <view class="item">
+  <text>简介</text>
+  <van-field value="{{formList.introduction}}" placeholder="输入简介" data-name="introduction" bind:change="onChange" />
+ </view>
+ <view class="item">
+  <text>分类</text>
+  <van-field value="{{formList.className}}" readonly  placeholder="请选择分类" bindtap="_handShowClass" />
+ </view>
+ <view class="item">
+  <text>内容（选填）</text>
+  <van-field type="textarea" autosize value="{{formList.content}}" data-name="content" placeholder="输入内容" bind:change="onChange" />
+ </view>
+ <view class="item">
+  <van-uploader file-list="{{ fileList }}" bind:after-read="afterRead" multiple max-count="10" bind:delete="_handDelImg" />
+ </view>
+ <van-button type="info" block bindtap="_handUpload">上传</van-button>
+</view>
+
+
+<van-popup
+  show="{{ show }}"
+  round
+  position="bottom"
+  custom-style="height: 40%"
+  bind:close="onClose"
+>
+  <van-picker 
+    columns="{{ columns }}"
+    title="类别选择" 
+    show-toolbar="{{true}}" 
+    bind:cancel="onCancel"
+    bind:confirm="onConfirm"
+    bind:change="classChange" />
+</van-popup>

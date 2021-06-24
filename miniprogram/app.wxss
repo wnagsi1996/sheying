@@ -1,0 +1,28 @@
+/**app.wxss**/
+page{
+  font-size:28rpx
+}
+.text-size-xs{
+  font-size:24rpx
+}
+.text-size-sm{
+  font-size:32rpx
+}
+.text-size-md{
+  font-size:36rpx
+}
+.text-size-lg{
+  font-size:48rpx
+}
+.text-size-2x{
+  font-size:60rpx
+}
+.color-blue{
+  color:	#00BFFF
+}
+.color-red{
+  color:red
+}
+color-light{
+  color:#B0C4DE
+}
