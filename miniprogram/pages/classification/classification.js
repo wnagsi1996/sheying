@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    list:[]
   },
 
   /**
@@ -33,6 +33,30 @@ Page({
       name:'GetSubClass'
     }).then(res=>{
       console.log(res)
+      if(res.errMsg=='cloud.callFunction:ok'){
+        let rows=res.result.data;
+        if(rows.length>0){
+          let classlist=[]
+          rows.forEach(n=>{
+            if(!classlist.some(m=>n.classificationName!=m.name)){
+              let obj={
+                name:n.classificationName,
+                id:n.classificationID,
+                children:[]
+              }
+              classlist.push(obj)
+            }
+            classlist.forEach(m=>{
+              if(m.name==n.classificationName){
+                m.children.push(n)
+              }
+            })
+          })
+          this.setData({
+            list:classlist
+          })
+        }
+      }
     }).catch(err=>{
       console.log(err)
     })
