@@ -1,2 +1,36 @@
 <!--pages/classification/classification.wxml-->
-<text>pages/classification/classification.wxml</text>
+<view class="swiper-box">
+  <swiper autoplay circular>
+    <swiper-item wx:for="{{recommendList}}" wx:key="index" item-id="index" data-id="{{item._id}}" bindtap="_handSwiper">
+      <view class="flex-image">
+        <image class="swiper-img" src="{{item.imgsrc}}" mode="center"></image>
+        <view class="info">
+          <text class="text-size-md">{{item.name}}</text>
+          <text>{{item.enname}}</text>
+        </view>
+      </view>
+      
+    </swiper-item>
+  </swiper>
+</view>
+<view class="list">
+  <view class="list-box" wx:for="{{list}}" wx:key="index">
+    <view class="head">
+      <view class="name text-size-md">{{item.name}}</view>
+      <view class="more">查看更多</view>
+    </view>
+    <view class="list-node">
+      <view class="node-item" wx:for="{{item.children}}" wx:for-item="n" wx:key-index="i" wx:key="i" data-id="{{n._id}}" 
+      bindtap="_handList">
+        <view class="img">
+          <image src="{{n.imgsrc}}"></image>
+        </view>
+        <view class="info">
+          <view class="title text-size-sm">{{n.name}}</view>
+          <view class="desc">{{n.desc}}</view>
+          <view class="enname">{{n.enname}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -12,6 +12,8 @@ exports.main = async (event, context) => {
     const {type}=event;
     if(type=='add'){
       const {imgList,title,introduction,content,userName,userId,subclassId}=event;
+      let myDate=new Date()
+      myDate=myDate.toLocaleDateString()+'-'+myDate.toLocaleTimeString().subString(2);
       try {
         let res =await cloud.database().collection('article').add({
           data:{
@@ -24,7 +26,8 @@ exports.main = async (event, context) => {
             subclassId,
             shareNum:0,
             commentNum:0,
-            LikeNum:0
+            LikeNum:0,
+            time:myDate
           }
         })
          let reslist=await cloud.database().collection('userList').where({_id:userId}).get();

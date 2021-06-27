@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list:[]
+    list:[],
+    recommendList:[]
   },
 
   /**
@@ -37,8 +38,9 @@ Page({
         let rows=res.result.data;
         if(rows.length>0){
           let classlist=[]
+          let recommendList=[]
           rows.forEach(n=>{
-            if(!classlist.some(m=>n.classificationName!=m.name)){
+            if(!classlist.some(m=>n.classificationName==m.name)){
               let obj={
                 name:n.classificationName,
                 id:n.classificationID,
@@ -51,14 +53,31 @@ Page({
                 m.children.push(n)
               }
             })
+            //处理热门推荐
+            if(n.recommend){
+              recommendList.push(n)
+            }
           })
+          console.log(recommendList)
           this.setData({
-            list:classlist
+            list:classlist,
+            recommendList
           })
         }
       }
     }).catch(err=>{
       console.log(err)
+    })
+  },
+  _handSwiper(e){
+    const id=e.currentTarget.dataset.id;
+    const recommendList=this.data.recommendList;
+  },
+  _handList(e){
+    const id=e.currentTarget.dataset.id;
+    const name=e.currentTarget.dataset.name;
+    wx.navigateTo({
+      url: `../list/list?id=${id}`
     })
   }
 })

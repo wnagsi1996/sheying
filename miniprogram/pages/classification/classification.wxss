@@ -1,1 +1,84 @@
 /* pages/classification/classification.wxss */
+.swiper-box{
+  width: 750rpx;
+}
+.flex-image{
+  width: 700rpx;
+  margin: 0 auto;
+  height: 300rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.swiper-img{
+  width: 750rpx;
+  height: 300rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+.flex-image .info{
+  position: absolute;
+  left: 30rpx;
+  bottom: 30rpx;
+  display: flex;
+  flex-direction: column;
+}
+.flex-image .info text:first-child{
+  color: #fff;
+  letter-spacing: 4rpx;
+}
+.flex-image .info text:last-child{
+  color:rgb(228, 228, 228);
+  margin-top: 10rpx;
+}
+.list{
+  margin:25rpx;
+  display: flex;
+  flex-direction: column;
+}
+.list-box{
+  flex: 1;
+  margin:20rpx 0;
+}
+.list-box .head{
+  display: flex;
+  justify-content: space-between;
+}
+.list-box .head .more{
+  color: rgb(117, 117, 255);
+}
+.list-node{
+  display: flex;
+  flex-direction: column;
+}
+.node-item{
+  display: flex;
+  margin:20rpx 0;
+  padding:20rpx 0;
+  border-bottom:1px solid #f7f7f7
+}
+.node-item .img{
+  width: 160rpx;
+  height: 160rpx;
+}
+.node-item .img image{
+  width: 100%;
+  height: 100%;
+  border-radius: 20rpx;
+}
+.node-item .info{
+  flex:1;
+  margin-left: 20rpx;
+ display: flex;
+ flex-direction: column;
+  justify-content: space-between;
+}
+.node-item .info .desc{
+  color:#444
+}
+.node-item .info .enname{
+  color: rgb(141, 141, 141);
+}

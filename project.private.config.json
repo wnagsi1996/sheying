@@ -29,6 +29,12 @@
           "pathName": "pages/classification/classification",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "分类",
+          "pathName": "pages/list/list",
+          "query": "id=b00064a760d0948721aa62d05a26672b",
+          "scene": null
         }
       ]
     }

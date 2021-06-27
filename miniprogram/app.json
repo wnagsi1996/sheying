@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/classification/classification",
     "pages/user/user",
-    "pages/add/add"
+    "pages/add/add",
+    "pages/list/list"
   ],
   "window":{
     "navigationBarTitleText": "摄影展",
