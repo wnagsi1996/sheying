@@ -1,0 +1,14 @@
+<!--pages/desc/desc.wxml-->
+<view>
+  <view class="head">
+    <view class="title text-size-sm">{{goodsDesc.title}}</view>
+    <view class="desc">{{goodsDesc.introduction}}</view>
+    <view class="zuozhe color-red">上传者:{{goodsDesc.userName}}</view>
+  </view>
+  <view>
+    <image style="width:750rpx" wx:for="{{imgList}}" wx:key="index" src="{{item}}" mode="widthFix"></image>
+  </view>
+  <view class="content">
+    {{goodsDesc.content}}
+  </view>
+</view>

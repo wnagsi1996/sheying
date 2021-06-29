@@ -4,7 +4,8 @@
     "pages/classification/classification",
     "pages/user/user",
     "pages/add/add",
-    "pages/list/list"
+    "pages/list/list",
+    "pages/desc/desc"
   ],
   "window":{
     "navigationBarTitleText": "摄影展",

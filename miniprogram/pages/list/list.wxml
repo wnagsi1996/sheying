@@ -1,2 +1,12 @@
 <!--pages/list/list.wxml-->
-<text>pages/list/list.wxml</text>
+<view class="list">
+  <view class="list-box" wx:for="{{list}}" wx:key="index" data-id="{{item._id}}" bindtap="_handToUrl">
+    <view class="img-box">
+      <image src="{{item.imgsrc}}" mode="center"></image>
+    </view>
+    <view class="info">
+      <view class="title text-size-sm">{{item.title}}</view>
+      <view class="introduction">{{item.introduction}}</view>
+    </view>
+  </view>
+</view>

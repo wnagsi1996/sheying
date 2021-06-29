@@ -26,7 +26,7 @@ exports.main = async (event, context) => {
       .field({
         imgList:true,
         title:true,
-        desc:true,
+        introduction:true,
         comment:true
       })
       .get();

@@ -68,17 +68,32 @@
 		"conversation": {
 			"list": []
 		},
-		"game": {
+		"plugin": {
 			"list": []
 		},
-		"plugin": {
+		"game": {
 			"list": []
 		},
 		"gamePlugin": {
 			"list": []
 		},
 		"miniprogram": {
-			"list": []
+			"list": [
+				{
+					"id": -1,
+					"name": "列表",
+					"pathName": "pages/list/list",
+					"query": "id=b00064a760d0948721aa62d05a26672b",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "详情",
+					"pathName": "pages/desc/desc",
+					"query": "id=79550af260d35dea216fe36c632d9726",
+					"scene": null
+				}
+			]
 		}
 	}
 }

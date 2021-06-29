@@ -14,6 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     const id=options.id;
     this.setData({
       id
@@ -21,21 +22,30 @@ Page({
     this.geArticletList()
   },
   geArticletList(){
+    const {index,size,id}=this.data;
+    console.log(index,size,id);
     wx.cloud.callFunction({
       name:'GetArticleList',
       data:{
-        index:this.data.index,
-        size:this.data.size,
-        id:this.data.id
+        index,
+        size,
+        id,
       }
     }).then(res=>{
-      console.log(res)
        if(res.errMsg=='cloud.callFunction:ok'){
-         this.setData({
-          list:res.result.data
+         let data=res.result.data;
+         data.forEach(n=>{
+           if(n.imgList.includes(',')){
+            n.imgsrc=n.imgList.split(',')[0]
+           }else{
+            n.imgsrc=n.imgList
+           }
          })
-         console.log(res.result.name.name)
-         if(this.data.index==0){
+         this.setData({
+          list:data
+         })
+         console.log(data)
+         if(index==0){
            wx.setNavigationBarTitle({
              title: res.result.name.name
            })
@@ -43,6 +53,12 @@ Page({
        }
     }).catch(err=>{
       console.log(err)
+    })
+  },
+  _handToUrl(e){
+    const {id}=e.currentTarget.dataset
+    wx.navigateTo({
+      url: '../desc/desc?id='+id,
     })
   },
   /**
