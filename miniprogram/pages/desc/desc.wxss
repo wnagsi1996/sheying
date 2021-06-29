@@ -1,0 +1,11 @@
+/* pages/desc/desc.wxss */
+.head{
+  text-align: center;
+}
+.head .desc{
+  padding:10rpx 0;
+  color: rgb(141, 141, 141)
+}
+.content{
+  margin:25rpx;
+}

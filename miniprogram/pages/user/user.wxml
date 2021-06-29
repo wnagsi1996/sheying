@@ -15,7 +15,7 @@
    </view>
   </view>
   <view class="header-bottom">
-    <view class="headeer-item">
+    <view class="headeer-item" data-url="../myArticle/myArticle" bindtap="toUrl">
       <view class="num text-size-lg">{{isLogin?userInfo.articleNum:0}}</view>
       <view class="name">作品</view>
     </view>

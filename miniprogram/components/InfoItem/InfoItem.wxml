@@ -1,0 +1,20 @@
+<!--components/InfoItem/InfoItem.wxml-->
+<view class="list-box" data-id="{{infoData._id}}"  bindtap="_handToUrl">
+  <view class="img-box">
+    <image src="{{infoData.imgsrc}}" mode="center"></image>
+  </view>
+  <view class="info">
+    <view class="title text-size-sm">{{infoData.title}}</view>
+    <view class="introduction">{{infoData.introduction}}</view>
+    <view class="icon-box" wx:if="{{iconShow}}">
+      <view class="icon-num">
+        <van-icon name="like-o" />
+        {{infoData.LikeNum}}
+      </view>
+      <view class="icon-num">
+        <van-icon name="share-o" />
+        {{infoData.shareNum}}
+      </view>
+    </view>
+  </view>
+</view>

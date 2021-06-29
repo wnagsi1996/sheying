@@ -23,6 +23,6 @@ page{
 .color-red{
   color:red
 }
-color-light{
+.color-light{
   color:#B0C4DE
 }

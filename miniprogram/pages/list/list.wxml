@@ -1,2 +1,6 @@
 <!--pages/list/list.wxml-->
-<text>pages/list/list.wxml</text>
+<view class="list">
+  <block wx:for="{{list}}" wx:key="index">
+    <InfoItem infoData="{{item}}"></InfoItem>
+  </block>
+</view>

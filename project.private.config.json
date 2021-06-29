@@ -35,6 +35,12 @@
           "pathName": "pages/list/list",
           "query": "id=b00064a760d0948721aa62d05a26672b",
           "scene": null
+        },
+        {
+          "name": "作品",
+          "pathName": "pages/myArticle/myArticle",
+          "query": "",
+          "scene": null
         }
       ]
     }

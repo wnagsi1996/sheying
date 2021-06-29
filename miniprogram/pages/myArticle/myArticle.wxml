@@ -1,0 +1,7 @@
+<!--pages/myArticle/myArticle.wxml-->
+<view class="list">
+  <block wx:for="{{list}}" wx:key="index">
+    <InfoItem infoData="{{item}}" iconShow="{{true}}"></InfoItem>
+  </block>
+</view>
+
