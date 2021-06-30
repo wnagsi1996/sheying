@@ -1,7 +1,12 @@
 <!--pages/myArticle/myArticle.wxml-->
 <view class="list">
   <block wx:for="{{list}}" wx:key="index">
-    <InfoItem infoData="{{item}}" iconShow="{{true}}"></InfoItem>
+    <van-swipe-cell right-width="{{ 65 }}" data-id="{{item._id}}" async-close bind:close="onClose">
+      <InfoItem infoData="{{item}}" iconShow="{{true}}"></InfoItem>
+      <view class="del-btn" slot="right">删除</view>
+    </van-swipe-cell>
+    
   </block>
 </view>
+<van-dialog id="van-dialog" />
 

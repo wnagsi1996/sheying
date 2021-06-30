@@ -74,3 +74,16 @@
   height: 60rpx;
   line-height: 60rpx;
 }
+.phone{
+  text-align: center;
+  margin-top: 40rpx;
+  font-size: 32rpx;
+}
+.num{
+  margin-top: 20rpx;
+}
+.num .icon{
+  font-size: 36rpx;
+  padding-left: 8rpx;
+  color: green;
+}

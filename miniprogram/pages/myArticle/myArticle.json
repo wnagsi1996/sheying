@@ -1,6 +1,8 @@
 {
   "navigationBarTitleText": "我的作品",
   "usingComponents": {
-    "InfoItem":"../../components/InfoItem/InfoItem"
+    "InfoItem":"../../components/InfoItem/InfoItem",
+    "van-swipe-cell": "@vant/weapp/swipe-cell/index",
+    "van-dialog": "@vant/weapp/dialog/index"
   }
 }

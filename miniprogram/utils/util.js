@@ -21,6 +21,7 @@ const getUserInfo=()=>{
       if(res.errMsg=='cloud.callFunction:ok'){
         if(res.result.data.length>0){
           const userInfo=res.result.data[0];
+          wx.removeStorageSync('userInfo');
           wx.setStorageSync('userInfo', userInfo)
           resolve(true)
         }

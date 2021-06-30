@@ -5,14 +5,15 @@
     <view class="desc">{{goodsDesc.introduction}}</view>
     <view class="zuozhe color-red">上传者:{{goodsDesc.userName}}</view>
   </view>
-  <view>
-    <image style="width:750rpx" wx:for="{{imgList}}" wx:key="index" src="{{item}}" mode="widthFix"></image>
+  <view class="image-box">
+    <image style="width:700rpx" wx:for="{{imgList}}" wx:key="index" src="{{item}}" mode="widthFix"></image>
   </view>
   <view class="content">
     {{goodsDesc.content}}
   </view>
 </view>
 
+<view class="footer-null"></view>
 <view class="footer">
   <view class="icon" bindtap="_handLike">
     <van-icon class="red" wx:if="{{like}}" name="like" />
@@ -23,7 +24,11 @@
     <van-icon name="share-o" />
     <text>{{goodsDesc.shareNum}}</text>
   </view>
+  <button class="button-row" id="shareBtn" open-type="share">
+    <view>分享给亲友涨工资</view>
+  </button>
 </view> 
+
 
 <!-- 未登录提示登录 -->
 <van-action-sheet show="{{ loginShow }}" title="登录后才能收藏">

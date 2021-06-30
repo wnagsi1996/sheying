@@ -1,6 +1,9 @@
 <!--pages/list/list.wxml-->
 <view class="list">
-  <block wx:for="{{list}}" wx:key="index">
-    <InfoItem infoData="{{item}}"></InfoItem>
+  <block wx:if="{{list.length>0}}">
+    <InfoItem wx:for="{{list}}" wx:key="index" infoData="{{item}}"></InfoItem>
+  </block>
+  <block wx:else>
+    <van-empty description="暂无数据" />
   </block>
 </view>

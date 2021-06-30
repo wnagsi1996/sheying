@@ -32,5 +32,8 @@
       "selectedIconPath": "./images/user-check.png"
     }]
   },
+  "usingComponents": {
+    "van-empty": "@vant/weapp/empty/index"
+  },
   "sitemapLocation": "sitemap.json"
 }

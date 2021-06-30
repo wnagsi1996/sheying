@@ -3,7 +3,7 @@
   <swiper autoplay circular  previous-margin="10px" next-margin="10px">
     <swiper-item wx:for="{{recommendList}}" wx:key="index" item-id="index" data-id="{{item._id}}" bindtap="_handSwiper">
       <view class="flex-image">
-        <image class="swiper-img" src="{{item.imgsrc}}" mode="center"></image>
+        <image class="swiper-img" src="{{item.imgsrc}}" mode="widthFix"></image>
         <view class="info">
           <text class="text-size-md">{{item.name}}</text>
           <text>{{item.enname}}</text>

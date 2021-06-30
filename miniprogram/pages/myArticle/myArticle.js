@@ -1,4 +1,6 @@
 // pages/myArticle/myArticle.js
+import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
+import {getUserInfo} from '../../utils/util'
 Page({
 
   /**
@@ -13,7 +15,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const userInfo=wx.getStorageSync('userInfo')
+    const userInfo=wx.getStorageSync('userInfo');
     this.setData({
       id:userInfo._id
     })
@@ -55,7 +57,51 @@ Page({
     }).catch(err=>{
       wx.hideLoading()
     })
-    
+  },
+  //关闭
+  onClose(event){
+    const { position, instance } = event.detail;
+    const {id}=event.currentTarget.dataset;
+    switch (position) {
+      case 'left':
+      case 'cell':
+        instance.close();
+        break;
+      case 'right':
+        Dialog.confirm({
+          message: '确定删除吗？',
+        }).then(async () => {
+          wx.showLoading({
+            title: '删除中...',
+          })
+          const res= await wx.cloud.callFunction({
+            name:'DelArticle',
+            data:{
+              id
+            }
+          })
+          console.log(res)
+          if(res.result.stats.removed==1){
+            wx.showToast({
+              title: '删除成功',
+            })
+            let list=this.data.list;
+            list=list.filter(n=>n._id!=id)
+            this.setData({
+              list
+            })
+            getUserInfo()
+          }else{
+            wx.showToast({
+              title: '删除失败',
+              icon:'none'
+            })
+          }
+          wx.hideLoading()
+          instance.close();
+        });
+        break;
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

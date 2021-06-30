@@ -1,11 +1,14 @@
 /* pages/classification/classification.wxss */
+swiper{
+  height:350rpx;
+}
 .swiper-box{
   width: 750rpx;
 }
 .flex-image{
   width: 700rpx;
   margin: 0 auto;
-  height: 300rpx;
+  height: 350rpx;
   border-radius: 20rpx;
   overflow: hidden;
   display: flex;
@@ -14,8 +17,8 @@
   position: relative;
 }
 .swiper-img{
-  width: 750rpx;
-  height: 300rpx;
+  width: 700rpx;
+  height: 350rpx;
   border-radius: 20rpx;
   overflow: hidden;
 }

@@ -68,5 +68,12 @@ Page({
     wx.navigateTo({
       url
     })
+  },
+  _handPhone(){
+    wx.makePhoneCall({
+      phoneNumber: '18350716162',
+      success:()=>{},
+      fail:()=>{}
+    })
   }
 })

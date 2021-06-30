@@ -188,7 +188,7 @@ Page({
       title: '提交中',
     })
     const len=fileList.length;
-    let imgList='';
+    let imgList=[];
     
     fileList.forEach((n,i)=>{
       wx.cloud.uploadFile({
@@ -196,7 +196,7 @@ Page({
         filePath:n.url, // 文件路径
         success: res => {
           // get resource ID
-          imgList+=`${res.fileID},`
+          imgList.push(res.fileID)
           if(len==i+1){
             this.upload(imgList)
           }
@@ -217,7 +217,8 @@ Page({
   upload(imgList){
     const {title,introduction,content}=this.data.formList;
     const userInfo=wx.getStorageSync('userInfo')
-    let listimg=imgList.substring(0,imgList.length-1)
+    // let listimg=imgList.substring(0,imgList.length-1)
+    let listimg=imgList.toString()
     //图片，标题，简介，内容，上传者，分享次数，评论条数，收藏，对应列表Id
     wx.cloud.callFunction({
       name:'Article',

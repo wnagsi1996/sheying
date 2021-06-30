@@ -33,3 +33,8 @@
 <view class="menu-list">
   <view class="list-item" data-url="../add/add" bindtap="toUrl">发布作品</view>
 </view>
+<view class="phone">
+  <view>开发者电话</view>
+  <view class="num" bindtap="_handPhone">18350716162<van-icon class="icon" name="phone-o" /></view>
+  
+</view>
