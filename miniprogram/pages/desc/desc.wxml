@@ -12,3 +12,22 @@
     {{goodsDesc.content}}
   </view>
 </view>
+
+<view class="footer">
+  <view class="icon" bindtap="_handLike">
+    <van-icon class="red" wx:if="{{like}}" name="like" />
+    <van-icon wx:if="{{!like}}" name="like-o" />
+    <text class="red">{{goodsDesc.LikeNum}}</text>
+  </view>
+  <view class="icon">
+    <van-icon name="share-o" />
+    <text>{{goodsDesc.shareNum}}</text>
+  </view>
+</view> 
+
+<!-- 未登录提示登录 -->
+<van-action-sheet show="{{ loginShow }}" title="登录后才能收藏">
+  <view class="login-btn">
+    <button open-type="getUserInfo" type="primary" bindtap="_handLogin">登录</button>
+  </view>
+</van-action-sheet>

@@ -1,6 +1,6 @@
 <!--pages/classification/classification.wxml-->
 <view class="swiper-box">
-  <swiper autoplay circular>
+  <swiper autoplay circular  previous-margin="10px" next-margin="10px">
     <swiper-item wx:for="{{recommendList}}" wx:key="index" item-id="index" data-id="{{item._id}}" bindtap="_handSwiper">
       <view class="flex-image">
         <image class="swiper-img" src="{{item.imgsrc}}" mode="center"></image>

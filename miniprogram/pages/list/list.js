@@ -22,6 +22,9 @@ Page({
     this.geArticletList()
   },
   geArticletList(){
+    wx.showLoading({
+      title: '加载中...',
+    })
     const {index,size,id}=this.data;
     console.log(index,size,id);
     wx.cloud.callFunction({
@@ -32,6 +35,7 @@ Page({
         id,
       }
     }).then(res=>{
+      wx.hideLoading()
        if(res.errMsg=='cloud.callFunction:ok'){
          let data=res.result.data;
          data.forEach(n=>{
@@ -52,6 +56,7 @@ Page({
          }
        }
     }).catch(err=>{
+      wx.hideLoading()
       console.log(err)
     })
   },

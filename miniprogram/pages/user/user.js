@@ -1,4 +1,5 @@
 // pages/user/user.js
+import {login} from '../../utils/util'
 Page({
 
   /**
@@ -39,32 +40,19 @@ Page({
       })
     }
   },
-  //获取用户信息
+  //获取用户信息-登录
   _getUserInfo(e){
     wx.getUserProfile({
       desc: '完善资料',
       success:e=>{
-        console.log(e)
-        wx.cloud.callFunction({
-          name:'Login',
-          data:e.userInfo,
-          success:res=>{
-           console.log(res.result.data)
-           if(res.errMsg=='cloud.callFunction:ok'){
-             if(res.result.data.length>0){
-               const userInfo=res.result.data[0];
-               this.setData({
-                userInfo,
-                isLogin:true
-               })
-               wx.setStorageSync('userInfo', userInfo)
-             }
-           }
-          },
-          fail:err=>{
-            console.log(err)
+        login(e.userInfo).then(res=>{
+          if(res){
+            this.setData({
+              userInfo,
+              isLogin:true
+             })
           }
-      })
+        })
     }, 
       fail:err=>{
         wx.showToast({

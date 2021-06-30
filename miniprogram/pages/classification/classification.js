@@ -30,10 +30,13 @@ Page({
     this.getClassList()
   },
   getClassList(){
+    wx.showLoading({
+      title: '加载中...',
+    })
     wx.cloud.callFunction({
       name:'GetSubClass'
     }).then(res=>{
-      console.log(res)
+      wx.hideLoading()
       if(res.errMsg=='cloud.callFunction:ok'){
         let rows=res.result.data;
         if(rows.length>0){
@@ -66,6 +69,7 @@ Page({
         }
       }
     }).catch(err=>{
+      wx.hideLoading()
       console.log(err)
     })
   },
