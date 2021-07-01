@@ -14,6 +14,11 @@ exports.main = (event, context) => {
       const res = await cloud.database().collection('article').where({
         _id:id
       }).get();
+      const res1 = await cloud.database().collection('articleLike').where({
+        articleID:id
+      }).get();
+      let len=res1.data.length;
+      res.data[0].likeNum=len
       resolve(res.data[0])
     } catch (error) {
       reject(error)

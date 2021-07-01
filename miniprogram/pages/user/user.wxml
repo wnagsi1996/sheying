@@ -19,8 +19,8 @@
       <view class="num text-size-lg">{{isLogin?userInfo.articleNum:0}}</view>
       <view class="name">作品</view>
     </view>
-    <view class="headeer-item">
-      <view class="num text-size-lg">{{isLogin?userInfo.LikeNum:0}}</view>
+    <view class="headeer-item" data-url="../myLike/myLike" bindtap="toUrl">
+      <view class="num text-size-lg">{{isLogin?userInfo.likeNum:0}}</view>
       <view class="name">喜欢</view>
     </view>
     <view class="headeer-item">

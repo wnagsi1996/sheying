@@ -1,0 +1,15 @@
+/* pages/myArticle/myArticle.wxss */
+page{
+  background-color: #f7f7f7;
+}
+.list{
+  margin:25rpx;
+}
+.del-btn{
+  width: 130rpx;
+  height:200rpx;
+  line-height: 200rpx;
+  text-align: center;
+  background-color: red;
+  color: #fff;
+}

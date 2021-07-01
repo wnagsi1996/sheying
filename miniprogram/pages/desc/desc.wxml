@@ -18,7 +18,7 @@
   <view class="icon" bindtap="_handLike">
     <van-icon class="red" wx:if="{{like}}" name="like" />
     <van-icon wx:if="{{!like}}" name="like-o" />
-    <text class="red">{{goodsDesc.LikeNum}}</text>
+    <text class="red">{{goodsDesc.likeNum}}</text>
   </view>
   <view class="icon">
     <van-icon name="share-o" />

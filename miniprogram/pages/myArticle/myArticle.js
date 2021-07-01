@@ -47,7 +47,6 @@ Page({
         this.setData({
          list:data
         })
-        console.log(data)
         if(index==0){
           wx.setNavigationBarTitle({
             title: res.result.name.name

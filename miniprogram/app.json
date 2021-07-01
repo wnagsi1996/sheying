@@ -6,7 +6,8 @@
     "pages/add/add",
     "pages/list/list",
     "pages/desc/desc",
-    "pages/myArticle/myArticle"
+    "pages/myArticle/myArticle",
+    "pages/myLike/myLike"
   ],
   "window":{
     "navigationBarTitleText": "摄影展",

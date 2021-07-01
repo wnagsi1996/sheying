@@ -1,5 +1,5 @@
 <!--components/InfoItem/InfoItem.wxml-->
-<view class="list-box" data-id="{{infoData._id}}"  bindtap="_handToUrl">
+<view class="list-box" data-id="{{infoData._id}}"  mut-bind:tap="_handToUrl">
   <view class="img-box">
     <image src="{{infoData.imgsrc}}" mode="center"></image>
   </view>

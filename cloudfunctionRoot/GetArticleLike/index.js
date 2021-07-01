@@ -9,22 +9,17 @@ cloud.init({
 // 云函数入口函数
 exports.main = async (event, context) => {
   return new Promise(async (resolve,reject)=>{
-    const wxContext = cloud.getWXContext()
-    const {OPENID}=wxContext;
-    const {_id}=event;
+    // const wxContext = cloud.getWXContext()
+    // const {OPENID}=wxContext;
+    const {_id,userId}=event;
     try {
-      const res=await cloud.database().collection('userList').where({
-        OPENID
+      const res=await cloud.database().collection('articleLike').where({
+        articleID:_id,
+        userID:userId
       }).get()
-      console.log(res)
       if(res.errMsg=='collection.get:ok'){
         if(res.data.length>0){
-          const {LikeID}=res.data[0];
-          if(LikeID==''){
-            resolve('0')
-          }
-          const likeAttr=LikeID.split(",");
-          likeAttr.includes(_id)?resolve('1'):resolve('0') 
+          resolve('1')
         }
         resolve('0')
       }

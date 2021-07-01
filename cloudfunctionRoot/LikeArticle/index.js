@@ -9,7 +9,7 @@ cloud.init({
 // 云函数入口函数
 exports.main = async (event, context) => {
   return new Promise(async (reslove,reject)=>{
-    const {_id,type}=event;
+    const {_id,type,userId}=event;
     const wxContext = cloud.getWXContext()
     const {OPENID}=wxContext;
     
@@ -17,67 +17,48 @@ exports.main = async (event, context) => {
       reslove({code:'0',msg:'请登录'})
       return;
     }
-    const res=await cloud.database().collection('userList').where({
-      OPENID
-    }).get();
     if(type=='add'){
       try {
-        if(res.errMsg=='collection.get:ok'){
-            let  {LikeNum,LikeID}=res.data[0];
-            LikeNum++;
-            LikeID==''?LikeID=_id:LikeID=`${LikeID},${_id}`
-            console.log(LikeNum)
-            const res2= await cloud.database().collection('userList').where({OPENID}).update({
+          const res=await cloud.database().collection('articleLike').where({
+            articleID:_id,
+            userID:userId
+          }).get();
+          if(res.data.length==0){
+            let myDate=new Date();
+            myDate=myDate.toLocaleTimeString()+'-'+myDate.toLocaleDateString().substring(2)
+            const res1=await cloud.database().collection('articleLike').add({
               data:{
-                LikeNum,
-                LikeID
+                articleID:_id,
+                userID:userId,
+                time:myDate
               }
             })
-            const res3=await cloud.database().collection('article').where({_id}).get();
-            let LikeNum1=res3.data[0].LikeNum
-            LikeNum1++
-            await cloud.database().collection('article').where({_id}).update({
-              data:{
-                LikeNum:LikeNum1
-              }
-            })
-            reslove(res2)
-        }else{
-          reslove({code:'0',msg:'数据出错'})
-          return
-        }
+            reslove({code:'1',msg:'收藏成功'})
+          }else{
+            reslove({code:'0',msg:'收藏失败'})
+          }
        } catch (error) {
-        console.log(3)
          reject(error)
        }
     }else if(type=='cancel'){
      try {
-      if(res.errMsg=='collection.get:ok'){
-        let  {LikeNum,LikeID}=res.data[0];
-        LikeNum--;
-        let likeAttr=LikeID.split(',');
-        likeAttr=likeAttr.filter(n=>n!=_id);
-        const res2= await cloud.database().collection('userList').where({OPENID}).update({
-          data:{
-            LikeNum,
-            LikeID:likeAttr.toString()
-          }
-        })
-        const res3=await cloud.database().collection('article').where({_id}).get();
-        let LikeNum1=res3.data[0].LikeNum
-        LikeNum1--
-        await cloud.database().collection('article').where({_id}).update({
-          data:{
-            LikeNum:LikeNum1
-          }
-        })
-        reslove(res2)
+      const res=await cloud.database().collection('articleLike').where({
+        articleID:_id,
+        userID:userId
+      }).get();
+      if(res.data.length>0){
+        const res1=await cloud.database().collection('articleLike').where({
+          articleID:_id,
+          userID:userId
+        }).remove();
+        reslove({code:'1',msg:'取消收藏成功'})
+      }else{
+        reslove({code:'0',msg:'取消收藏失败'})
       }
      } catch (error) {
        reject(error)
      }
     }
-   
   })
   
 }

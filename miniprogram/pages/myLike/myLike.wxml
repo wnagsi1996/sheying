@@ -1,4 +1,4 @@
-<!--pages/myArticle/myArticle.wxml-->
+<!--pages/myLike/myLike.wxml-->
 <view class="list">
   <block wx:for="{{list}}" wx:key="index">
     <van-swipe-cell right-width="{{ 65 }}" data-id="{{item._id}}" async-close mut-bind:close="onClose">
@@ -9,4 +9,3 @@
   </block>
 </view>
 <van-dialog id="van-dialog" />
-

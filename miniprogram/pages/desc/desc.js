@@ -19,7 +19,8 @@ Page({
     const {id}=options;
     this.setData({
       id
-    })
+    });
+   
     this.getDesc(id)
   },
   //d登录
@@ -67,13 +68,11 @@ Page({
         }
       }).then(res=>{
         wx.hideLoading()
-        console.log(res)
         if(res.errMsg=='cloud.callFunction:ok'){
           wx.setNavigationBarTitle({
             title: res.result.title,
           })
           let imgList=res.result.imgList.split(',');
-          console.log(imgList)
           this.setData({
             goodsDesc:res.result,
             imgList
@@ -89,13 +88,14 @@ Page({
   },
   getLike(){
     const userInfo=wx.getStorageSync('userInfo');
-    const id=userInfo._id;
+    const userId=userInfo._id;
     if(userInfo){
       const {_id}=this.data.goodsDesc
       wx.cloud.callFunction({
         name:'GetArticleLike',
         data:{
-          _id
+          _id,
+          userId
         }
       }).then(res=>{
         console.log(res)
@@ -135,14 +135,16 @@ Page({
       name:'LikeArticle',
       data:{
        _id,
-       type
+       type,
+       userId:wx.getStorageSync('userInfo')._id
       }
     }).then(res=>{
+      console.log(res)
       wx.hideLoading()
       if(res.errMsg=='cloud.callFunction:ok'){
-        if(res.result.stats.updated=='1'){
+        if(res.result.code=='1'){
           wx.showToast({
-            title: type?'取消收藏成功':'收藏成功',
+            title: res.result.msg
           })
           this.setData({
            like:type?false:true
@@ -151,13 +153,13 @@ Page({
          this.getDesc(this.data.id)
         }else{
          wx.showToast({
-           title: '操作失败',
+           title: res.result.msg,
            icon:'none'
          })
         }
       }else{
        wx.showToast({
-         title: '操作失败',
+         title: res.result.msg,
          icon:'none'
        })
       }

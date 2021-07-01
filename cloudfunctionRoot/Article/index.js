@@ -26,7 +26,6 @@ exports.main = async (event, context) => {
             subclassId,
             shareNum:0,
             commentNum:0,
-            LikeNum:0,
             time:myDate
           }
         })

@@ -25,7 +25,6 @@ exports.main =  (event, context) => {
           nickName,
           province,
           OPENID,
-          LikeNum:0,
           phone:'',
           scanNum:0,
           worksNum:0,
@@ -33,20 +32,21 @@ exports.main =  (event, context) => {
         }
       })
     }
-    cloudtable.where({
+    const res1=await cloudtable.where({
       OPENID
     }).field({
       avatarUrl:true,
       nickName:true,
-      LikeNum:true,
       scanNum:true,
       worksNum:true,
       articleNum:true
-    }).get().then(res=>{
+    }).get();
+      const id=res.data[0]._id;
+      const res2=await cloud.database().collection('articleLike').where({
+        userID:id
+      }).get();
+      res.data[0].likeNum=res2.data.length;
       resolve(res)
-    }).catch(err=>{
-      reject(err);
-    })
   })
   
 }

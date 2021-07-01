@@ -10,21 +10,26 @@ exports.main =  (event, context) => {
   return new Promise(async (resolve,reject)=>{
     const wxContext = cloud.getWXContext()
     const {OPENID}=wxContext;
-    const cloudtable=cloud.database().collection('userList')
-    cloudtable.where({
-      OPENID
-    }).field({
-      avatarUrl:true,
-      nickName:true,
-      LikeNum:true,
-      scanNum:true,
-      worksNum:true,
-      articleNum:true
-    }).get().then(res=>{
+    try {
+      const res=await cloud.database().collection('userList').where({
+        OPENID
+      }).field({
+        avatarUrl:true,
+        nickName:true,
+        scanNum:true,
+        worksNum:true,
+        articleNum:true
+      }).get();
+      const id=res.data[0]._id;
+      const res1=await cloud.database().collection('articleLike').where({
+        userID:id
+      }).get();
+      console.log(res1)
+      res.data[0].likeNum=res1.data.length;
       resolve(res)
-    }).catch(err=>{
-      reject(err);
-    })
+    } catch (error) {
+      reject(error)
+    }
   })
   
 }

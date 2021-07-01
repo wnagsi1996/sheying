@@ -92,6 +92,12 @@
 					"pathName": "pages/desc/desc",
 					"query": "id=79550af260d35dea216fe36c632d9726",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "喜欢",
+					"pathName": "pages/myLike/myLike",
+					"scene": null
 				}
 			]
 		}

@@ -28,7 +28,7 @@ Page({
    */
   onShow: function () {
     const userInfo=wx.getStorageSync('userInfo');
-   
+    console.log(userInfo)
     if(userInfo){
       this.setData({
        userInfo,
@@ -48,7 +48,7 @@ Page({
         login(e.userInfo).then(res=>{
           if(res){
             this.setData({
-              userInfo,
+              userInfo:wx.getStorageSync('userInfo'),
               isLogin:true
              })
           }
