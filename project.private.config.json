@@ -25,21 +25,21 @@
           "scene": null
         },
         {
-          "name": "分类",
-          "pathName": "pages/classification/classification",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "分类",
-          "pathName": "pages/list/list",
-          "query": "id=b00064a760d0948721aa62d05a26672b",
-          "scene": null
-        },
-        {
           "name": "作品",
           "pathName": "pages/myArticle/myArticle",
           "query": "",
+          "scene": null
+        },
+        {
+          "name": "喜欢",
+          "pathName": "pages/myLike/myLike",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "详情",
+          "pathName": "pages/desc/desc",
+          "query": "id=79550af260ddd5052373a15c312d7f3d",
           "scene": null
         }
       ]

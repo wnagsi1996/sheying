@@ -29,9 +29,12 @@ Page({
   //获取分类
    getClassList(){
     wx.cloud.callFunction({
-      name:'GetClassList',
+      name:'Article',
+      data:{
+        action:'GetClassList'
+      },
       success:res=>{
-        console.log(res.result)
+        console.log(res)
         if(res.errMsg=='cloud.callFunction:ok'){
           const classList=res.result;
           let columns1=classList.map(n=>n.name)
@@ -223,7 +226,7 @@ Page({
     wx.cloud.callFunction({
       name:'Article',
       data:{
-        type:'add',
+        action:'add',
         imgList:listimg,
         title,
         introduction,

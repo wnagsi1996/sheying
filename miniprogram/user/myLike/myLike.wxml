@@ -1,0 +1,11 @@
+<!--pages/myLike/myLike.wxml-->
+<view class="list" wx:if="{{list.length>0}}">
+  <block wx:for="{{list}}" wx:key="index">
+    <van-swipe-cell right-width="{{ 65 }}" data-id="{{item._id}}" async-close bind:close="onClose">
+      <InfoItem infoData="{{item}}" iconShow="{{true}}" openImg="{{true}}"></InfoItem>
+      <view class="del-btn" slot="right">删除</view>
+    </van-swipe-cell>
+  </block>
+</view>
+<van-empty wx:else description="暂无收藏" />
+<van-dialog id="van-dialog" />

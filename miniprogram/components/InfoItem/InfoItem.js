@@ -11,6 +11,10 @@ Component({
     iconShow:{
       type:Boolean,
       value:false
+    },
+    openImg:{
+      type:Boolean,
+      value:false
     }
   },
   
@@ -35,12 +39,24 @@ Component({
    */
   methods: {
     _handToUrl(e){
-      console.log(e)
-      const {id}=e.currentTarget.dataset;
-      console.log(id)
-      wx.navigateTo({
-        url: '../../pages/desc/desc?id='+id,
-      })
+      if(!this.data.openImg){
+        const {id}=e.currentTarget.dataset;
+        console.log(id)
+        wx.navigateTo({
+          url: '../../pages/desc/desc?id='+id,
+        })
+      }
+      
     },
+    _handToUrlImg(e){
+      if(this.data.openImg){
+        const {id}=e.currentTarget.dataset;
+        console.log(id)
+        wx.navigateTo({
+          url: '../../pages/desc/desc?id='+id,
+        })
+      }
+      
+    }
   }
 })

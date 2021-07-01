@@ -1,4 +1,4 @@
-// pages/myArticle/myArticle.js
+// pages/myLike/myLike.js
 import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 import {getUserInfo} from '../../utils/util'
 Page({
@@ -8,34 +8,34 @@ Page({
    */
   data: {
     index:0,
-    size:20
+    size:20,
+    list:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const userInfo=wx.getStorageSync('userInfo');
-    this.setData({
-      id:userInfo._id
-    })
-   this.getList()
+    this.getList()
   },
-  getList(){
+  async getList(){
     wx.showLoading({
       title: '加载中...',
     })
-    const {index,size,id}=this.data
-    wx.cloud.callFunction({
-      name:'GetMyArticleList',
+    const {index,size}=this.data;
+    const res= await wx.cloud.callFunction({
+      name:'Article',
       data:{
+        action:'GetMyLike',
         index,
         size,
-        id
+        id:wx.getStorageSync('userInfo')._id
       }
-    }).then(res=>{
-      wx.hideLoading()
-      if(res.errMsg=='cloud.callFunction:ok'){
+    })
+    wx.hideLoading()
+    console.log(res)
+    if(res.errMsg=='cloud.callFunction:ok'){
+      if(res.result.code==1){
         let data=res.result.data;
         data.forEach(n=>{
           if(n.imgList.includes(',')){
@@ -47,18 +47,11 @@ Page({
         this.setData({
          list:data
         })
-        if(index==0){
-          wx.setNavigationBarTitle({
-            title: res.result.name.name
-          })
-        }
       }
-    }).catch(err=>{
-      wx.hideLoading()
-    })
+    }
   },
-  //关闭
-  onClose(event){
+   //关闭
+   onClose(event){
     const { position, instance } = event.detail;
     const {id}=event.currentTarget.dataset;
     switch (position) {
@@ -74,13 +67,15 @@ Page({
             title: '删除中...',
           })
           const res= await wx.cloud.callFunction({
-            name:'DelArticle',
+            name:'LikeArticle',
             data:{
-              id
-            }
+              _id:id,
+              type:'cancel',
+              userId:wx.getStorageSync('userInfo')._id
+             }
           })
           console.log(res)
-          if(res.result.stats.removed==1){
+          if(res.result.code=='1'){
             wx.showToast({
               title: '删除成功',
             })

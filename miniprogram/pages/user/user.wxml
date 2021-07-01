@@ -15,11 +15,11 @@
    </view>
   </view>
   <view class="header-bottom">
-    <view class="headeer-item" data-url="../myArticle/myArticle" bindtap="toUrl">
+    <view class="headeer-item" data-url="../../user/myArticle/myArticle" bindtap="toUrl">
       <view class="num text-size-lg">{{isLogin?userInfo.articleNum:0}}</view>
       <view class="name">作品</view>
     </view>
-    <view class="headeer-item" data-url="../myLike/myLike" bindtap="toUrl">
+    <view class="headeer-item" data-url="../../user/myLike/myLike" bindtap="toUrl">
       <view class="num text-size-lg">{{isLogin?userInfo.likeNum:0}}</view>
       <view class="name">喜欢</view>
     </view>
@@ -31,7 +31,7 @@
   
 </view>
 <view class="menu-list">
-  <view class="list-item" data-url="../add/add" bindtap="toUrl">发布作品</view>
+  <view class="list-item" data-url="../../user/add/add" bindtap="toUrl">发布作品</view>
 </view>
 <view class="phone">
   <view>开发者电话</view>

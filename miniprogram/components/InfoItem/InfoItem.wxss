@@ -32,3 +32,10 @@
   margin:20rpx;
   color: #ccc;
 }
+.open-img{
+  position: absolute;
+  left: 220rpx;
+  bottom:10rpx;
+  color:#ccc;
+  font-size: 22rpx;
+}

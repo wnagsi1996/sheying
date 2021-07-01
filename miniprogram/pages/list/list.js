@@ -28,8 +28,9 @@ Page({
     const {index,size,id}=this.data;
     console.log(index,size,id);
     wx.cloud.callFunction({
-      name:'GetArticleList',
+      name:'Article',
       data:{
+        action:'getList',
         index,
         size,
         id,
@@ -119,7 +120,22 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (res) {
+    console.log(res)
+    const {_id}=wx.getStorageSync('userInfo');
+    return {
+      title: '分享生活中精美图片',
+      path: '/page/list/list?id='+_id,
+      success:()=>{
+        wx.showToast({
+          title: '分享成功',
+        })
+      },
+      fail:()=>{
+        wx.showToast({
+          title: '分享失败',
+        })
+      }
+    }
   }
 })

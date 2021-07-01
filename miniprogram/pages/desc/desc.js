@@ -58,15 +58,18 @@ Page({
     })
   },
   getDesc(id){
+    
     wx.showLoading({
       title: '加载中...',
     })
      wx.cloud.callFunction({
-        name:'GetArticleDesc',
+        name:'Article',
         data:{
+          action:'getDesc',
           id
         }
       }).then(res=>{
+        console.log(res)
         wx.hideLoading()
         if(res.errMsg=='cloud.callFunction:ok'){
           wx.setNavigationBarTitle({
@@ -92,8 +95,9 @@ Page({
     if(userInfo){
       const {_id}=this.data.goodsDesc
       wx.cloud.callFunction({
-        name:'GetArticleLike',
+        name:'Article',
         data:{
+          action:'isLike',
           _id,
           userId
         }
@@ -130,12 +134,12 @@ Page({
       title: '提交中...',
     })
     const like=this.data.like;
-    const type=like?'cancel':'add'
+    const action=like?'cancelLike':'like'
     wx.cloud.callFunction({
-      name:'LikeArticle',
+      name:'Article',
       data:{
        _id,
-       type,
+       action,
        userId:wx.getStorageSync('userInfo')._id
       }
     }).then(res=>{
@@ -147,7 +151,7 @@ Page({
             title: res.result.msg
           })
           this.setData({
-           like:type?false:true
+           like:!this.data.like
           })
          getUserInfo();
          this.getDesc(this.data.id)
@@ -216,7 +220,22 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (res) {
+    const {goodsDesc}=this.data;
+    const {_id}=wx.getStorageSync('userInfo');
+    return {
+      title: goodsDesc.title,
+      path: '/page/desc/desc?id='+_id,
+      success:()=>{
+        wx.showToast({
+          title: '分享成功',
+        })
+      },
+      fail:()=>{
+        wx.showToast({
+          title: '分享失败',
+        })
+      }
+    }
   }
 })

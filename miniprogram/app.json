@@ -3,11 +3,9 @@
     "pages/index/index",
     "pages/classification/classification",
     "pages/user/user",
-    "pages/add/add",
     "pages/list/list",
-    "pages/desc/desc",
-    "pages/myArticle/myArticle",
-    "pages/myLike/myLike"
+    "pages/desc/desc"
+    
   ],
   "window":{
     "navigationBarTitleText": "摄影展",
@@ -33,6 +31,17 @@
       "selectedIconPath": "./images/user-check.png"
     }]
   },
+  "subpackages":[
+    {
+      "root": "user",
+      "name":"UserCenter",
+      "pages": [
+        "myArticle/myArticle",
+        "myLike/myLike",
+        "add/add"
+      ]
+    }
+  ],
   "usingComponents": {
     "van-empty": "@vant/weapp/empty/index"
   },

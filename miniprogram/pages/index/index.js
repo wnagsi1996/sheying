@@ -14,7 +14,10 @@ Page({
       title: '加载中...',
     })
     wx.cloud.callFunction({
-      name:'GetArticleRecommed'
+      name:'Article',
+      data:{
+        action:'recommed'
+      }
     }).then(res=>{
       wx.hideLoading()
       if(res.errMsg=='cloud.callFunction:ok'){

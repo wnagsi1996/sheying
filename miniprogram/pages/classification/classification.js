@@ -34,7 +34,10 @@ Page({
       title: '加载中...',
     })
     wx.cloud.callFunction({
-      name:'GetSubClass'
+      name:'Article',
+      data:{
+        action:'GetSubClass'
+      }
     }).then(res=>{
       wx.hideLoading()
       if(res.errMsg=='cloud.callFunction:ok'){
