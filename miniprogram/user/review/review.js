@@ -1,15 +1,15 @@
-// pages/myLike/myLike.js
+// miniprogram/user/review/review.js
 import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
-import {getUserInfo} from '../../utils/util'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    index:0,
     size:20,
-    list:[]
+    index:0,
+    list:[],
+    recommend:true
   },
 
   /**
@@ -22,21 +22,19 @@ Page({
     wx.showLoading({
       title: '加载中...',
     })
-    const {index,size}=this.data;
-    const res= await wx.cloud.callFunction({
+    const {index,size}=this.data
+    const res=await wx.cloud.callFunction({
       name:'Article',
       data:{
-        action:'GetMyLike',
-        index,
+        action:'review',
+        recommend:this.data.recommend,
         size,
-        id:wx.getStorageSync('userInfo')._id
+        index
       }
     })
     wx.hideLoading()
-    console.log(res)
-    if(res.errMsg=='cloud.callFunction:ok'){
-      if(res.result.code==1){
-        let data=res.result.data;
+    if(res.result.code=='1'){
+      let data=res.result.data;
         data.forEach(n=>{
           if(n.imgList.includes(',')){
            n.imgsrc=n.imgList.split(',')[0]
@@ -44,11 +42,17 @@ Page({
            n.imgsrc=n.imgList
           }
         })
-        this.setData({
-         list:data
-        })
-      }
+      this.setData({
+        list:data
+      })
     }
+  },
+  onClick(e){
+    this.setData({
+      recommend:e.detail.name==0?true:false,
+      index:0
+    })
+    this.getList()
   },
    //关闭
    onClose(event){
@@ -60,40 +64,39 @@ Page({
         instance.close();
         break;
       case 'right':
-        Dialog.confirm({
-          message: '确定删除吗？',
-        }).then(async () => {
-          wx.showLoading({
-            title: '删除中...',
-          })
-          const res= await wx.cloud.callFunction({
-            name:'Article',
-            data:{
-              _id:id,
-              action:'cancelLike',
-              userId:wx.getStorageSync('userInfo')._id
-             }
-          })
-          console.log(res)
-          if(res.result.code=='1'){
-            wx.showToast({
-              title: '删除成功',
+        const {recommend}=this.data;
+          Dialog.confirm({
+            message: recommend?'确定要取消推荐吗':'确定要推荐该文章吗',
+          }).then(async () => {
+            wx.showLoading({
+              title: '取消中...',
             })
-            let list=this.data.list;
-            list=list.filter(n=>n._id!=id)
-            this.setData({
-              list
+            const res= await wx.cloud.callFunction({
+              name:'Article',
+              data:{
+                _id:id,
+                action:'adminRecommend',
+                userId:wx.getStorageSync('userInfo')._id
+               }
             })
-            getUserInfo()
-          }else{
-            wx.showToast({
-              title: '删除失败',
-              icon:'none'
-            })
-          }
-          wx.hideLoading()
-          instance.close();
-        });
+            if(res.result.code=='1'){
+              wx.showToast({
+                title: recommend?'取消成功':'推荐成功',
+              })
+              let list=this.data.list;
+              list=list.filter(n=>n._id!=id)
+              this.setData({
+                list
+              })
+            }else{
+              wx.showToast({
+                title: recommend?'取消失败':'推荐失败',
+                icon:'none'
+              })
+            }
+            wx.hideLoading()
+            instance.close();
+          });
         break;
     }
   },
@@ -129,20 +132,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.setData({
-      index:0
-    })
-    this.getList()
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.setData({
-      index:this.data.index++
-    })
-    this.getList()
+
   },
 
   /**

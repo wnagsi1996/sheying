@@ -23,8 +23,32 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(wx.getStorageSync('userInfo'))
-   this.getClassList()
+    wx.getNetworkType({
+      success: (result) => {
+        console.log(result);
+        if(result.networkType!='wifi'){
+          wx.showModal({
+            content: '建议使用WIFI环境上传',
+            showCancel:true,
+            success (res) {
+              if (res.confirm) {
+                wx.startWifi({
+                  success (res) {
+                    console.log(res)
+                    if(res.errMsg=='startWifi:ok'){
+                      wx.getWifiList()
+                    }
+                  }
+                })
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+              }
+            }
+          })
+        }
+      },
+    })
+    this.getClassList()
   },
   //获取分类
    getClassList(){

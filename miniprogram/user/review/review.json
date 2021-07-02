@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "设置首页推荐",
+  "usingComponents": {
+    "InfoItem":"../../components/InfoItem/InfoItem",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-swipe-cell": "@vant/weapp/swipe-cell/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index"
+  }
+}

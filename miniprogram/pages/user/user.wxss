@@ -63,16 +63,15 @@
   line-height: 180rpx;
   margin-left: 40rpx;
 }
-.menu-list{
+
+.list-item{
   margin:25rpx;
   background-color: #fff;
-  padding: 20rpx;
   box-shadow: 0 0 20rpx #d3d3d3;
-  border-radius: 10rpx;
-}
-.list-item{
-  height: 60rpx;
-  line-height: 60rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  border-radius: 20rpx;
+  padding: 20rpx;
 }
 .phone{
   text-align: center;
@@ -86,4 +85,8 @@
   font-size: 36rpx;
   padding-left: 8rpx;
   color: green;
+}
+.login-btn{
+  width: 600rpx;
+  margin:20rpx auto;
 }

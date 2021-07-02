@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isLogin:false
+    isLogin:false,
+    loginShow:false
   },
 
   /**
@@ -28,24 +29,33 @@ Page({
    */
   onShow: function () {
     const userInfo=wx.getStorageSync('userInfo');
-    console.log(userInfo)
+    
     if(userInfo){
       this.setData({
        userInfo,
-       isLogin:true
+       isLogin:true,
+       admin:userInfo._id=='b00064a760d1e14521de3a465933c6d4'?true:false
       })
     }else{
      this.setData({
-       isLogin:false
+       isLogin:false,
+       admin:false
       })
     }
   },
   //获取用户信息-登录
-  _getUserInfo(e){
+  _getUserInfo(){
+    this.setData({
+      loginShow:false
+    })
+    wx.showLoading({
+      title: '登录中...',
+    })
     wx.getUserProfile({
       desc: '完善资料',
       success:e=>{
         login(e.userInfo).then(res=>{
+          wx.hideLoading()
           if(res){
             this.setData({
               userInfo:wx.getStorageSync('userInfo'),
@@ -55,6 +65,7 @@ Page({
         })
     }, 
       fail:err=>{
+        wx.hideLoading()
         wx.showToast({
           title:'用户点击取消',
           icon:'none'
@@ -64,10 +75,23 @@ Page({
   },
   //导航跳转
   toUrl(e){
-    const url=e.currentTarget.dataset.url;
-    wx.navigateTo({
-      url
-    })
+    if(this.data.isLogin){
+      const url=e.currentTarget.dataset.url;
+      wx.navigateTo({
+        url
+      })
+    }else{
+      wx.showModal({
+        content: '请先登录',
+        success:(res)=>{
+          if (res.confirm) {
+            this.setData({
+              loginShow:true
+            })
+          }
+        }
+      })
+    }
   },
   _handPhone(){
     wx.makePhoneCall({
@@ -75,5 +99,5 @@ Page({
       success:()=>{},
       fail:()=>{}
     })
-  }
+  },
 })

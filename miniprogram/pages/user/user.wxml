@@ -32,9 +32,16 @@
 </view>
 <view class="menu-list">
   <view class="list-item" data-url="../../user/add/add" bindtap="toUrl">发布作品</view>
+  <view wx:if="{{admin}}" class="list-item" data-url="../../user/review/review" bindtap="toUrl">设置首页推荐</view>
 </view>
 <view class="phone">
   <view>开发者电话</view>
   <view class="num" bindtap="_handPhone">18350716162<van-icon class="icon" name="phone-o" /></view>
-  
 </view>
+
+<!-- 未登录提示登录 -->
+<van-action-sheet show="{{ loginShow }}" title="请先登录">
+  <view class="login-btn">
+    <button open-type="getUserInfo" type="primary" bindtap="_getUserInfo">登录</button>
+  </view>
+</van-action-sheet>

@@ -1,0 +1,18 @@
+<!--miniprogram/user/review/review.wxml-->
+<van-tabs bind:click="onClick">
+  <van-tab title="已推荐" />
+  <van-tab title="未推荐" />
+</van-tabs>
+<view class="list" wx:if="{{list.length>0}}">
+  <block wx:for="{{list}}" wx:key="index">
+    <van-swipe-cell right-width="{{ 65 }}" data-id="{{item._id}}" async-close bind:close="onClose">
+      <InfoItem infoData="{{item}}" openImg="{{true}}"></InfoItem>
+      <view class="del-btn" slot="right" wx:if="{{recommend}}">取消</view>
+      <view class="del-btn" slot="right" wx:else>推荐</view>
+    </van-swipe-cell>
+  </block>
+</view>
+<van-empty wx:else description="暂无文章" />
+
+<van-dialog id="van-dialog" />
+

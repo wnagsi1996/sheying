@@ -1,9 +1,9 @@
 <!--index.wxml-->
 <view class="container">
   <swiper circular class="swiper">
-    <swiper-item wx:for="{{list}}" wx:key="index">
+    <swiper-item wx:for="{{list}}" wx:key="index" data-id="{{item._id}}" bindtap="_handSwiper">
       <view class="swiper-box">
-        <image class="image" src="{{item.imgList}}" mode="heightFix"></image>
+        <image class="image" src="{{item.imgsrc}}" mode="heightFix"></image>
         <view class="info">
           <view class="title text-size-md">{{item.title}}</view>
           <view class="desc">{{item.introduction}}</view>

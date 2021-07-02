@@ -1,5 +1,5 @@
 // pages/desc/desc.js
-import {getUserInfo,login} from '../../utils/util'
+import {getUserInfo,login,authorize} from '../../utils/util'
 Page({
 
   /**
@@ -175,6 +175,54 @@ Page({
       wx.hideLoading()
     })
   },
+  //长按保存图片
+  async _handSaveImg(e){
+    let {url} = e.currentTarget.dataset;
+    const authres=await authorize('scope.writePhotosAlbum');
+    if(!authres){
+      wx.showModal({
+        title: '提示',
+        content:'需要授权才能保存图片到相册',
+        success:(res)=>{
+          if (res.confirm) {
+            wx.openSetting({
+              success:(res)=>{
+                if(res.authSetting['scope.writePhotosAlbum']){
+                  this.saveImg(url)
+                }
+              }
+            })
+          }else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        },
+        fail:(err)=>{}
+      })
+    }else{
+      this.saveImg(url)
+    }
+  },
+  //保存图片
+  async saveImg(url){
+    const resImg=await wx.getImageInfo({
+      src: url
+    });
+    const path=resImg.path;
+    wx.saveImageToPhotosAlbum({
+      filePath: path,
+      success:(res)=>{
+        wx.showToast({
+          title: '保存成功',
+        })
+      },
+      fail:(err=>{
+        wx.showToast({
+          title: '保存失败',
+          icon:'none'
+        })
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -220,8 +268,26 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function (res) {
+  async onShareAppMessage(e) {
     const {goodsDesc}=this.data;
+    const res=await wx.cloud.callFunction({
+      name:'Article',
+      data:{
+        action:'shareAdd',
+        _id:goodsDesc._id
+      }
+    })
+    if(res.result){
+      let {shareNum}=goodsDesc;
+      shareNum++
+      Object.assign(goodsDesc,{shareNum})
+      this.setData({
+        goodsDesc
+      })
+    }
+
+
+    
     const {_id}=wx.getStorageSync('userInfo');
     return {
       title: goodsDesc.title,

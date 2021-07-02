@@ -1,44 +1,48 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/classification/classification",
     "pages/user/user",
     "pages/list/list",
     "pages/desc/desc"
-    
   ],
-  "window":{
+  "window": {
     "navigationBarTitleText": "摄影展",
-    "backgroundTextStyle":"light",
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "list": [{
-      "pagePath": "pages/index/index",
-      "text": "首页",
-      "iconPath": "./images/home.png",
-      "selectedIconPath": "./images/home-check.png"
-    },{
-      "pagePath": "pages/classification/classification",
-      "text": "分类",
-      "iconPath": "./images/class.png",
-      "selectedIconPath": "./images/class-check.png"
-    },{
-      "pagePath": "pages/user/user",
-      "text": "我的",
-      "iconPath": "./images/user.png",
-      "selectedIconPath": "./images/user-check.png"
-    }]
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "./images/home.png",
+        "selectedIconPath": "./images/home-check.png"
+      },
+      {
+        "pagePath": "pages/classification/classification",
+        "text": "分类",
+        "iconPath": "./images/class.png",
+        "selectedIconPath": "./images/class-check.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "./images/user.png",
+        "selectedIconPath": "./images/user-check.png"
+      }
+    ]
   },
-  "subpackages":[
+  "subpackages": [
     {
       "root": "user",
-      "name":"UserCenter",
+      "name": "UserCenter",
       "pages": [
         "myArticle/myArticle",
         "myLike/myLike",
-        "add/add"
+        "add/add",
+        "review/review"
       ]
     }
   ],

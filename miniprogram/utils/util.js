@@ -54,12 +54,37 @@ const login=(userInfo)=>{
         resolve(false)
       }
   })
-})
+}) 
+}
+//判断用户是否授权，没有就发起授权
+const authorize=(name)=>{
+  return new Promise((resolve,reject)=>{
+    wx.getSetting({
+      success(res) {
+        console.log(res)
+        if (!res.authSetting[name]) {
+          wx.authorize({
+            scope: name,
+            success:(res)=>{
+              console.log(res)
+              resolve(true)
+            },
+            fail:()=>{
+              resolve(false)
+            }
+          })
+        }else{
+          resolve(true)
+        }
+      }
+    })
+  })
   
 }
 
 module.exports = {
   formatTime,
   getUserInfo,
-  login
+  login,
+  authorize
 }

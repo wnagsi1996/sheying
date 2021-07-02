@@ -79,6 +79,9 @@ Page({
   _handSwiper(e){
     const id=e.currentTarget.dataset.id;
     const recommendList=this.data.recommendList;
+    wx.navigateTo({
+      url: `../list/list?id=${id}`
+    })
   },
   _handList(e){
     const id=e.currentTarget.dataset.id;
@@ -86,5 +89,12 @@ Page({
     wx.navigateTo({
       url: `../list/list?id=${id}`
     })
+  },
+  onShareAppMessage:function(e){
+    const {_id}=wx.getStorageSync('userInfo');
+    return{
+      title: '分享生活中精美图片',
+      path: '/page/classification/classification?id='+_id
+    }
   }
 })

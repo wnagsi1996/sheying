@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "关于我",
   "usingComponents": {
-    "van-icon": "@vant/weapp/icon/index"
+    "van-icon": "@vant/weapp/icon/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index"
   }
 }

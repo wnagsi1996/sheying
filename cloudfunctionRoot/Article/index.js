@@ -90,6 +90,7 @@ exports.main = async (event, context) => {
               userName,
               userId,
               subclassId,
+              recommend:false,
               shareNum:0,
               commentNum:0,
               time:formatTime()
@@ -309,16 +310,72 @@ exports.main = async (event, context) => {
         } catch (error) {
           reject(error)
         }
+      }else if(event.action=='review'){
+        //审核列表
+        const {recommend,index,size}=event;
+       
+        try {
+          const res=await db.collection('article').where({
+            recommend
+          })
+          .skip(index*size)
+          .limit(size)
+          .get();
+          console.log(event)
+          resolve({code:'1',data:res.data})
+          
+        } catch (error) {
+          reject(error)
+        }
+      }else if(event.action=='adminRecommend'){
+        //推荐和取消推荐
+        try {
+          const {_id,userId}=event;
+          if(userId=='b00064a760d1e14521de3a465933c6d4'){
+            const res=await db.collection('article').where({
+              _id
+            }).get();
+            if(res.data.length==0){
+              resolve({code:0,msg:'操作失败'})
+            }
+            const recommend=!res.data[0].recommend
+            const res1=await db.collection('article').where({
+              _id
+            }).update({
+              data:{
+                recommend
+              }
+            })
+            console.log(res1)
+            if(res1.stats.updated==1){
+              resolve({code:1,msg:'操作成功'})
+            }else{
+              resolve({code:0,msg:'操作失败'})
+            }
+          }else{
+            resolve({code:0,msg:'权限不够'})
+          }
+        } catch (error) {}
+      }else if(event.action=='shareAdd'){
+        try {
+          const {_id}=event;
+          const res=await db.collection('article').where({
+            _id
+          }).get();
+          
+          let {shareNum}=res.data[0]
+          shareNum++
+          const res1=await db.collection('article').where({
+            _id
+          }).update({
+            data:{
+              shareNum
+            }
+          });
+          resolve(true)
+        } catch (error) {
+          reject(error)
+        }
       }
-
-
-
-
-
-
-
-
-
-   
   })
 }

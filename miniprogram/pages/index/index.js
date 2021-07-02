@@ -1,5 +1,6 @@
 // index.js
 // 获取应用实例
+import {authorize} from '../../utils/util'
 const app = getApp()
 
 Page({
@@ -7,7 +8,7 @@ Page({
     list:[]
   },
   onLoad() {
-    this.getArticle()
+    this.getArticle();
   },
   getArticle(){
     wx.showLoading({
@@ -21,8 +22,16 @@ Page({
     }).then(res=>{
       wx.hideLoading()
       if(res.errMsg=='cloud.callFunction:ok'){
+        let data=res.result.data;
+        data.forEach(n=>{
+          if(n.imgList.includes(',')){
+           n.imgsrc=n.imgList.split(',')[0]
+          }else{
+           n.imgsrc=n.imgList
+          }
+        })
         this.setData({
-          list:res.result.data
+          list:data
         })
       }
       console.log(res)
@@ -30,5 +39,18 @@ Page({
       wx.hideLoading()
       console.log(err)
     })
+  },
+  _handSwiper(e){
+    const id=e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: `../desc/desc?id=${id}`
+    })
+  },
+  onShareAppMessage:function(e){
+    const {_id}=wx.getStorageSync('userInfo');
+    return{
+      title: '分享生活中精美图片',
+      path: '/page/index/index?id='+_id
+    }
   }
 })
